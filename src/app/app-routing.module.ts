@@ -4,6 +4,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login/login.component";
 import { SignUpComponent } from "./sign-up/sign-up.component";
+import { AddPostTemplateComponent } from "./post/add-post-template/add-post-template.component";
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: "signup",
     component: SignUpComponent,
+  },
+  {
+    path: "posts/add",
+    component: AddPostTemplateComponent,
   },
 ];
 

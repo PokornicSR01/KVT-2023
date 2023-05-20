@@ -1,28 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
-import { UserMenuComponent } from './user-menu/user-menu.component';
-import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import { HomeComponent } from "./home/home.component";
+import { HeaderComponent } from "./header/header.component";
+import { UserMenuComponent } from "./user-menu/user-menu.component";
+import { LoginComponent } from "./login/login.component";
+import { SignUpComponent } from "./sign-up/sign-up.component";
 
-import {AngularMaterialModule} from './angular-material/angular-material.module';
+import { AngularMaterialModule } from "./angular-material/angular-material.module";
 
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import {ApiService} from './service/api.service';
-import {ClubService} from './service/club.service';
-import {AuthService} from './service/auth.service';
-import {UserService} from './service/user.service';
-import {ConfigService} from './service/config.service';
+import { ApiService } from "./service/api.service";
+import { AuthService } from "./service/auth.service";
+import { UserService } from "./service/user.service";
+import { ConfigService } from "./service/config.service";
 
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './interceptor/TokenInterceptor';
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { TokenInterceptor } from "./interceptor/TokenInterceptor";
+import { TableComponent } from "./post/table/table/table.component";
+import { PostListComponent } from "./post/post-list/post-list/post-list.component";
+import { NavbarAdminComponent } from './core/navbar-admin/navbar-admin.component';
+import { NavbarUserComponent } from './core/navbar-user/navbar-user.component';
+import { AddPostTemplateComponent } from './post/add-post-template/add-post-template.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,11 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
     UserMenuComponent,
     LoginComponent,
     SignUpComponent,
+    TableComponent,
+    PostListComponent,
+    NavbarAdminComponent,
+    NavbarUserComponent,
+    AddPostTemplateComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,18 +51,17 @@ import { TokenInterceptor } from './interceptor/TokenInterceptor';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [ 
+  providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
+      multi: true,
     },
-    ClubService,
     AuthService,
     ApiService,
     UserService,
     ConfigService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
