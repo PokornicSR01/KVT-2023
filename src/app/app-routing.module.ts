@@ -5,6 +5,7 @@ import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login/login.component";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { AddPostTemplateComponent } from "./post/add-post-template/add-post-template.component";
+import { ChangePasswordComponent } from "./change-password/change-password.component";
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: "posts/add",
     component: AddPostTemplateComponent,
+  },
+  {
+    path: "changePassword",
+    component: ChangePasswordComponent,
   },
 ];
 

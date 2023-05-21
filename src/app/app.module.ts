@@ -27,6 +27,7 @@ import { PostListComponent } from "./post/post-list/post-list/post-list.componen
 import { NavbarAdminComponent } from './core/navbar-admin/navbar-admin.component';
 import { NavbarUserComponent } from './core/navbar-user/navbar-user.component';
 import { AddPostTemplateComponent } from './post/add-post-template/add-post-template.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AddPostTemplateComponent } from './post/add-post-template/add-post-temp
     NavbarAdminComponent,
     NavbarUserComponent,
     AddPostTemplateComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
