@@ -16,7 +16,6 @@ export class TableComponent implements OnInit {
 
   deletePost(postId: number) {
     this.postService.delete(postId).subscribe((post) => {
-      ;
     });
   }
 }

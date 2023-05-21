@@ -1,0 +1,17 @@
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Desription</th>
+            <th>Creation date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let group of groups">
+            <td>{{group.name}}</td>
+            <td>{{group.description}}</td>
+            <td>{{group.creationDate}}</td>
+            <td><a (click)="deleteGroup(group.id)" href="">delete</a></td>
+        </tr>
+    </tbody>
+</table>
