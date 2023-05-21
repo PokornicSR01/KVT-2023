@@ -5,7 +5,11 @@ import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login/login.component";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { AddPostTemplateComponent } from "./post/add-post-template/add-post-template.component";
+<<<<<<< HEAD
 import { AddGroupTemplateComponent } from "./group/add-group-template/add-group-template.component";
+=======
+import { ChangePasswordComponent } from "./change-password/change-password.component";
+>>>>>>> feature/posts
 
 const routes: Routes = [
   {
@@ -26,8 +30,13 @@ const routes: Routes = [
     component: AddPostTemplateComponent,
   },
   {
+<<<<<<< HEAD
     path: "groups/add",
     component: AddGroupTemplateComponent,
+=======
+    path: "changePassword",
+    component: ChangePasswordComponent,
+>>>>>>> feature/posts
   },
 ];
 

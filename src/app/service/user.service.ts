@@ -4,28 +4,27 @@ import {ConfigService} from './config.service';
 import {map} from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UserService {
-
   currentUser;
 
-  constructor(
-    private apiService: ApiService,
-    private config: ConfigService
-  ) {
-  }
+  constructor(private apiService: ApiService, private config: ConfigService) {}
 
   getMyInfo() {
-    return this.apiService.get(this.config.whoami_url)
-      .pipe(map(user => {
+    return this.apiService.get(this.config.whoami_url).pipe(
+      map((user) => {
         this.currentUser = user;
         return user;
-      }));
+      })
+    );
   }
 
   getAll() {
     return this.apiService.get(this.config.users_url);
   }
 
+  changePassword(user) {
+    return this.apiService.put("http://localhost:8080/api/users/changePassword", JSON.stringify(user), );
+  }
 }
