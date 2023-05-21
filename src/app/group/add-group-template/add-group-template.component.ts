@@ -28,14 +28,6 @@ export class AddGroupTemplateComponent implements OnInit {
           Validators.maxLength(64),
         ]),
       ],
-      creationDate: [
-        "",
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(64),
-        ]),
-      ],
       description: [
         "",
         Validators.compose([

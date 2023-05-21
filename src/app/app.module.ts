@@ -27,13 +27,10 @@ import { PostListComponent } from "./post/post-list/post-list/post-list.componen
 import { NavbarAdminComponent } from './core/navbar-admin/navbar-admin.component';
 import { NavbarUserComponent } from './core/navbar-user/navbar-user.component';
 import { AddPostTemplateComponent } from './post/add-post-template/add-post-template.component';
-<<<<<<< HEAD
 import { GroupListComponent } from './group/group-list/group-list.component';
 import { AddGroupTemplateComponent } from './group/add-group-template/add-group-template.component';
 import { GroupTableComponent } from './group/group-table/group-table.component';
-=======
 import { ChangePasswordComponent } from './change-password/change-password.component';
->>>>>>> feature/posts
 
 @NgModule({
   declarations: [
@@ -48,13 +45,10 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     NavbarAdminComponent,
     NavbarUserComponent,
     AddPostTemplateComponent,
-<<<<<<< HEAD
     GroupListComponent,
     AddGroupTemplateComponent,
     GroupTableComponent,
-=======
     ChangePasswordComponent,
->>>>>>> feature/posts
   ],
   imports: [
     BrowserModule,
