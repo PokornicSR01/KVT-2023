@@ -11,7 +11,21 @@
             <td>{{group.name}}</td>
             <td>{{group.description}}</td>
             <td>{{group.creationDate}}</td>
-            <td><a (click)="deleteGroup(group.id)" >delete</a></td>
+            <td><a (click)="deleteGroup(group.id)" href="">delete</a></td>
+            <button (click)="editGroup(group.id, group.name, group.description)">edit</button>
         </tr>
     </tbody>
+    <div *ngIf="editing" class="container">
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <label for="name_i" name="name_f">Name</label>
+            <br>
+            <input id="name_i" type="text" formControlName="name" required>
+            <br>
+            <label for="desc_i" name="desc_f">Description</label>
+            <br>
+            <textarea id="desc_i" type="text" formControlName="description" required></textarea>
+            <br>
+            <button type="submit">Save</button>
+        </form>
+    </div>
 </table>

@@ -7,22 +7,29 @@ import { Observable } from "rxjs";
 })
 export class GroupService {
   private headers = new HttpHeaders({ "Content-Type": "application/json" });
-  postUrl = "http://localhost:8080/api/groups";
+  groupUrl = "http://localhost:8080/api/groups";
 
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.postUrl + "/all");
+    return this.http.get<any[]>(this.groupUrl + "/all");
   }
 
   add(newGroup) {
-    return this.http.post(this.postUrl + "/create", JSON.stringify(newGroup), {
+    return this.http.post(this.groupUrl + "/create", JSON.stringify(newGroup), {
+      headers: this.headers,
+      responseType: "text",
+    });
+  }
+
+  edit(group) {
+    return this.http.put(this.groupUrl + "/edit", JSON.stringify(group), {
       headers: this.headers,
       responseType: "text",
     });
   }
 
   delete(groupId: number): Observable<number> {
-    return this.http.delete<number>(this.postUrl + "/?id=" + groupId);
+    return this.http.delete<number>(this.groupUrl + "/?id=" + groupId);
   }
 }

@@ -45,10 +45,21 @@ export class PostService {
   }
 
   edit(post) {
-    return this.http.put(this.postUrl + "/edit", JSON.stringify(post), {
-      headers: this.headers,
-      responseType: "text",
-    });
+    return this.http
+      .put(this.postUrl + "/edit", JSON.stringify(post), {
+        headers: this.headers,
+        responseType: "text",
+      })
+      .pipe(
+        map(() => {
+          console.log("Edit success");
+          this.router
+            .navigateByUrl("/", { skipLocationChange: true })
+            .then(() => {
+              this.router.navigate([""]);
+            });
+        })
+      );
   }
 
   userName() {

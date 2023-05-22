@@ -34,6 +34,7 @@ export class TableComponent implements OnInit {
   editPost(postId, postContent) {
     this.editing = true;
 
+    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
     this.form = this.formBuilder.group({
       id: postId,
       content: [
