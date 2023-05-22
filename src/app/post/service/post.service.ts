@@ -10,6 +10,7 @@ import { Observable } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { ApiService, ConfigService, UserService } from "src/app/service";
 import { HeaderComponent } from "src/app/header/header.component";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -20,7 +21,11 @@ export class PostService {
 
   user = this.userService.getMyInfo();
 
-  constructor(private http: HttpClient, private userService: UserService) {}
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   getAll(): Observable<any[]> {
     return this.http.get<any[]>(this.postUrl + "/all");
@@ -37,6 +42,13 @@ export class PostService {
   delete(postId: number): Observable<number> {
     console.log(this.postUrl + "/?id=" + postId);
     return this.http.delete<number>(this.postUrl + "/?id=" + postId);
+  }
+
+  edit(post) {
+    return this.http.put(this.postUrl + "/edit", JSON.stringify(post), {
+      headers: this.headers,
+      responseType: "text",
+    });
   }
 
   userName() {

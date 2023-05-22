@@ -12,6 +12,16 @@
             <td>{{post.creationDate}}</td>
             <td>{{post.user.username}}</td>
             <td><a (click)="deletePost(post.id)" href="">delete</a></td>
+            <button (click)="editPost(post.id, post.content)">edit</button>
         </tr>
     </tbody>
+    <div *ngIf="editing" class="container">
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <label for="cont_i" name="cont_f">Content</label>
+            <br>
+            <textarea id="cont_i" type="text" formControlName="content" required></textarea>
+            <br>
+            <button type="submit">Save</button>
+        </form>
+    </div>
 </table>
