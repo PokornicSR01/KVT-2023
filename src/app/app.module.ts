@@ -24,13 +24,15 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { TokenInterceptor } from "./interceptor/TokenInterceptor";
 import { TableComponent } from "./post/table/table/table.component";
 import { PostListComponent } from "./post/post-list/post-list/post-list.component";
-import { NavbarAdminComponent } from './core/navbar-admin/navbar-admin.component';
-import { NavbarUserComponent } from './core/navbar-user/navbar-user.component';
-import { AddPostTemplateComponent } from './post/add-post-template/add-post-template.component';
-import { GroupListComponent } from './group/group-list/group-list.component';
-import { AddGroupTemplateComponent } from './group/add-group-template/add-group-template.component';
-import { GroupTableComponent } from './group/group-table/group-table.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
+import { NavbarAdminComponent } from "./core/navbar-admin/navbar-admin.component";
+import { NavbarUserComponent } from "./core/navbar-user/navbar-user.component";
+import { AddPostTemplateComponent } from "./post/add-post-template/add-post-template.component";
+import { GroupListComponent } from "./group/group-list/group-list.component";
+import { AddGroupTemplateComponent } from "./group/add-group-template/add-group-template.component";
+import { GroupTableComponent } from "./group/group-table/group-table.component";
+import { ChangePasswordComponent } from "./change-password/change-password.component";
+import { ProfileComponent } from "./user/profile/profile.component";
+import { GroupDetailsComponent } from './group/group-details/group-details.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     AddGroupTemplateComponent,
     GroupTableComponent,
     ChangePasswordComponent,
+    ProfileComponent,
+    GroupDetailsComponent,
   ],
   imports: [
     BrowserModule,

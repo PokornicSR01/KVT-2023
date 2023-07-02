@@ -1,0 +1,53 @@
+<h3>{{group.name}}</h3>
+
+<button *ngIf="!isMember()" (click)="sendGroupRequest(group.id)">Send group request</button>
+
+<ul *ngIf="isAdmin()">
+    <h3>Group Requests</h3>
+    <li *ngFor="let request of groupRequests">
+        <p>Group request sent by: {{request.user.username}}</p>
+        <button (click)="approveRequest(request.id)">approve</button>
+        <button (click)="declineRequest(request.id)">decline</button>
+    </li>
+</ul>
+
+<ul *ngIf="isAdmin()">
+    <h3>Group Admins</h3>
+    <li *ngFor="let admin of groupAdmins">
+        <p>Group admin: {{admin.username}}</p>
+    </li>
+</ul>
+
+<ul *ngIf="isMember()">
+    <h3>Group Members</h3>
+    <li *ngFor="let member of groupMembers">
+        <p>Group member: {{member.username}} 
+            <button *ngIf="isAdmin() && !isUserAdmin(member.username)" (click)="promoteMember(member.id)">
+                promote</button>
+        </p>
+    </li>
+</ul>
+
+<ul *ngIf="isMember()">
+    <h3>Group Posts</h3>
+    <li *ngFor="let post of groupPosts">
+        <p>Post made by: {{post.user.username}}</p>
+        <p>Content: {{post.content}}</p>
+    </li>
+</ul>
+
+<form (ngSubmit)="onSubmit()" *ngIf="!submitted && isMember()" [formGroup]="form">
+    <div>
+        <label>Content</label>
+        <div>
+            <input type="text" id="content" placeholder="Content" name="Content" formControlName="content"
+                [(ngModel)]="post.name" required minlength="5">
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </div>
+</form>

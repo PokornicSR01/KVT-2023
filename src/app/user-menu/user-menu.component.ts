@@ -28,4 +28,8 @@ export class UserMenuComponent implements OnInit {
   changePassword() {
     this.router.navigate(["/changePassword"]);
   }
+
+  goToUserProfile() {
+    this.router.navigate(["/profile"]);
+  }
 }

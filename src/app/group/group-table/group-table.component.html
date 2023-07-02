@@ -1,3 +1,4 @@
+
 <table>
     <thead>
         <tr>
@@ -7,13 +8,17 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let group of groups">
-            <td>{{group.name}}</td>
-            <td>{{group.description}}</td>
-            <td>{{group.creationDate}}</td>
-            <td><a (click)="deleteGroup(group.id)" href="">delete</a></td>
-            <button (click)="editGroup(group.id, group.name, group.description)">edit</button>
-        </tr>
+        <nav>
+            <tr *ngFor="let group of groups">
+                <td><a routerLink="/groups/{{group.id}}">
+                    {{group.name}}</a>
+                </td>
+                <td>{{group.description}}</td>
+                <td>{{group.creationDate}}</td>
+                <td><a (click)="deleteGroup(group.id)" href="">delete</a></td>
+                <button (click)="editGroup(group.id, group.name, group.description)">edit</button>
+            </tr>
+        </nav>
     </tbody>
     <div *ngIf="editing" class="container">
         <form (ngSubmit)="onSubmit()" [formGroup]="form">

@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {ApiService} from './api.service';
-import {ConfigService} from './config.service';
-import {map} from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { ApiService } from "./api.service";
+import { ConfigService } from "./config.service";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -25,6 +25,15 @@ export class UserService {
   }
 
   changePassword(user) {
-    return this.apiService.put("http://localhost:8080/api/users/changePassword", JSON.stringify(user), );
+    return this.apiService.put(
+      "http://localhost:8080/api/users/changePassword",
+      JSON.stringify(user)
+    );
+  }
+
+  findUserProfile(username: string) {
+    return this.apiService
+      .get("http://localhost:8080/api/users/" + username + "/profile")
+      .subscribe();
   }
 }

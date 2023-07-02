@@ -8,6 +8,10 @@ import { AddPostTemplateComponent } from "./post/add-post-template/add-post-temp
 import { AddGroupTemplateComponent } from "./group/add-group-template/add-group-template.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
 import { CanActiveAuthGuardService } from "./service/can-active-auth-guard.service";
+import { ProfileComponent } from "./user/profile/profile.component";
+import { GroupTableComponent } from "./group/group-table/group-table.component";
+import { GroupListComponent } from "./group/group-list/group-list.component";
+import { GroupDetailsComponent } from "./group/group-details/group-details.component";
 
 const routes: Routes = [
   {
@@ -35,6 +39,18 @@ const routes: Routes = [
   {
     path: "changePassword",
     component: ChangePasswordComponent,
+  },
+  {
+    path: "profile",
+    component: ProfileComponent,
+  },
+  {
+    path: "groups",
+    component: GroupListComponent,
+  },
+  {
+    path: "groups/:id",
+    component: GroupDetailsComponent,
   },
 ];
 

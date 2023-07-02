@@ -3,6 +3,7 @@ import { Group } from "../model/group.model";
 import { GroupService } from "../service/group.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Location } from "@angular/common";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 
@@ -23,7 +24,8 @@ export class GroupTableComponent implements OnInit {
     private groupService: GroupService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit() {}
@@ -62,6 +64,8 @@ export class GroupTableComponent implements OnInit {
   }
 
   onSubmit() {
-    this.groupService.edit(this.form.value).subscribe((result) => {});
+    this.groupService.edit(this.form.value).subscribe((result) => {
+      
+    });
   }
 }

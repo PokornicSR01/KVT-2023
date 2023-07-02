@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { UserService } from "src/app/service";
 
 @Injectable({
   providedIn: "root",
@@ -8,8 +9,11 @@ import { Observable } from "rxjs";
 export class GroupService {
   private headers = new HttpHeaders({ "Content-Type": "application/json" });
   groupUrl = "http://localhost:8080/api/groups";
+  groupRequestUrl = "http://localhost:8080/api/group_requests";
 
-  constructor(private http: HttpClient) {}
+  user = this.userService.getMyInfo();
+
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   getAll(): Observable<any[]> {
     return this.http.get<any[]>(this.groupUrl + "/all");
@@ -22,6 +26,26 @@ export class GroupService {
     });
   }
 
+  addGroupPost(newPost, groupId) {
+    newPost.userUsername = this.userName();
+    return this.http.post(
+      this.groupUrl + `/${groupId}/posts`,
+      JSON.stringify(newPost),
+      {
+        headers: this.headers,
+        responseType: "text",
+      }
+    );
+  }
+
+  promoteMember(groupId: number, memberId: number): Observable<any> {
+    console.log(this.groupUrl + `/${groupId}/admins/${memberId}`);
+    return this.http.post(
+      this.groupUrl + `/${groupId}/admins/${memberId}`,
+      memberId
+    );
+  }
+
   edit(group) {
     return this.http.put(this.groupUrl + "/edit", JSON.stringify(group), {
       headers: this.headers,
@@ -30,6 +54,49 @@ export class GroupService {
   }
 
   delete(groupId: number): Observable<number> {
-    return this.http.delete<number>(this.groupUrl + "/?id=" + groupId);
+    return this.http.delete<number>(this.groupUrl + "/" + groupId);
+  }
+
+  getGroup(groupId: number): Observable<any> {
+    return this.http.get<any>(this.groupUrl + `/${groupId}`);
+  }
+
+  getGroupRequests(groupId: number): Observable<any> {
+    return this.http.get<any>(this.groupUrl + `/${groupId}/requests`);
+  }
+
+  sendGroupRequest(groupId: number): Observable<any> {
+    return this.http.post(this.groupRequestUrl + `/${groupId}/send`, groupId);
+  }
+
+  approveRequest(requestId: number): Observable<any> {
+    return this.http.post(
+      this.groupRequestUrl + `/${requestId}/approve`,
+      requestId
+    );
+  }
+
+  declineRequest(requestId: number): Observable<any> {
+    return this.http.post(
+      this.groupRequestUrl + `/${requestId}/decline`,
+      requestId
+    );
+  }
+
+  getGroupAdmins(groupId: number): Observable<any> {
+    return this.http.get<any>(this.groupUrl + `/${groupId}/admins`);
+  }
+
+  getGroupsMembers(groupId: number): Observable<any> {
+    return this.http.get<any>(this.groupUrl + `/${groupId}/members`);
+  }
+
+  getGroupsPosts(groupId: number): Observable<any> {
+    return this.http.get<any>(this.groupUrl + `/${groupId}/posts`);
+  }
+
+  userName() {
+    const user = this.userService.currentUser;
+    return user.username;
   }
 }

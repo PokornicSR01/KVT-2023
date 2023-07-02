@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { GroupService } from "../service/group.service";
+import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 
 @Component({
@@ -15,7 +16,8 @@ export class AddGroupTemplateComponent implements OnInit {
   constructor(
     private groupService: GroupService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -41,7 +43,7 @@ export class AddGroupTemplateComponent implements OnInit {
 
   onSubmit() {
     this.groupService.add(this.form.value).subscribe((result) => {
-      this.router.navigate([""]);
+      this.location.back();
     });
   }
 }
