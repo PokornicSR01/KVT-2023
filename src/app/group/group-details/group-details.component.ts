@@ -3,6 +3,7 @@ import { GroupService } from "../service/group.service";
 import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "src/app/service";
+import { CommentService } from "src/app/service/comment.service";
 
 @Component({
   selector: "app-group-details",
@@ -22,11 +23,29 @@ export class GroupDetailsComponent implements OnInit {
   post = {};
   form: FormGroup;
 
+  suspend = {};
+  suspendForm: FormGroup;
+  suspending = false;
+
+  selectedPost: any;
+  watchingComments = false;
+  comments: any;
+
+  commenting = false;
+  comment = {};
+  formComment: FormGroup;
+
+  reply = {};
+  formReply: FormGroup;
+  replies: any;
+  watchingReplies = false;
+
   constructor(
     private route: ActivatedRoute,
     private groupService: GroupService,
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private commentService: CommentService
   ) {}
 
   ngOnInit() {
@@ -39,6 +58,39 @@ export class GroupDetailsComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       content: [
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(64),
+        ]),
+      ],
+    });
+
+    this.suspendForm = this.formBuilder.group({
+      content: [
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(64),
+        ]),
+      ],
+    });
+
+    this.formComment = this.formBuilder.group({
+      commentText: [
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(64),
+        ]),
+      ],
+    });
+
+    this.formReply = this.formBuilder.group({
+      commentText: [
         "",
         Validators.compose([
           Validators.required,
@@ -67,6 +119,10 @@ export class GroupDetailsComponent implements OnInit {
     this.groupService
       .getGroupRequests(this.id)
       .subscribe((groupRequests) => (this.groupRequests = groupRequests));
+  }
+
+  suspendGroup(): void {
+    this.suspending = true;
   }
 
   approveRequest(requestId: number): void {
@@ -99,12 +155,16 @@ export class GroupDetailsComponent implements OnInit {
     this.groupService.addGroupPost(this.form.value, this.id).subscribe();
   }
 
+  onSubmitSuspend(): void {
+    this.groupService.suspendGroup(this.form.value, this.id).subscribe();
+  }
+
   getLoggedUser(): void {
     const user = this.userService.currentUser;
     this.loggedUser = user.username;
   }
 
-  isAdmin(): boolean {
+  isGroupAdmin(): boolean {
     let userIsAdmin = false;
 
     this.groupAdmins.forEach((admin) => {
@@ -113,6 +173,15 @@ export class GroupDetailsComponent implements OnInit {
       }
     });
 
+    return userIsAdmin;
+  }
+
+  isAdmin(): boolean {
+    let userIsAdmin = false;
+    let currentUser = this.userService.currentUser;
+    if (currentUser.role == "ADMIN") {
+      userIsAdmin = true;
+    }
     return userIsAdmin;
   }
 
@@ -138,5 +207,29 @@ export class GroupDetailsComponent implements OnInit {
     });
 
     return userIsMember;
+  }
+
+  onSeeComments(post, postId) {
+    this.selectedPost = post;
+    this.watchingComments = true;
+    this.commentService.getPostComments(postId).subscribe((comments) => {
+      this.comments = comments;
+    });
+  }
+
+  onSubmitReply(commentId) {
+    this.commentService
+      .reply(this.formReply.value, commentId)
+      .subscribe((result) => {});
+  }
+
+  onSubmitComment(postId) {
+    this.commentService
+      .create(this.formComment.value, postId)
+      .subscribe((result) => {});
+  }
+
+  deleteGroup(groupId: number) {
+    this.groupService.delete(groupId).subscribe((group) => {});
   }
 }

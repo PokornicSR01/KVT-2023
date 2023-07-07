@@ -5,20 +5,18 @@
             <th>Name</th>
             <th>Desription</th>
             <th>Creation date</th>
+            <!-- <th></th> -->
         </tr>
     </thead>
     <tbody>
-        <nav>
             <tr *ngFor="let group of groups">
                 <td><a routerLink="/groups/{{group.id}}">
                     {{group.name}}</a>
                 </td>
                 <td>{{group.description}}</td>
                 <td>{{group.creationDate}}</td>
-                <td><a (click)="deleteGroup(group.id)" href="">delete</a></td>
-                <button (click)="editGroup(group.id, group.name, group.description)">edit</button>
+                <!-- <td><button (click)="editGroup(group.id, group.name, group.description)">edit</button></td> -->
             </tr>
-        </nav>
     </tbody>
     <div *ngIf="editing" class="container">
         <form (ngSubmit)="onSubmit()" [formGroup]="form">

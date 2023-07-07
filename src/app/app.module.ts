@@ -33,6 +33,10 @@ import { GroupTableComponent } from "./group/group-table/group-table.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
 import { ProfileComponent } from "./user/profile/profile.component";
 import { GroupDetailsComponent } from './group/group-details/group-details.component';
+import { UserSearchComponent } from './user/user-search/user-search.component';
+import { FriendProfileComponent } from './user/friend-profile/friend-profile.component';
+import { PostDetailsComponent } from './post/post-details/post-details.component';
+import { CommentComponent } from './comment/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,10 @@ import { GroupDetailsComponent } from './group/group-details/group-details.compo
     ChangePasswordComponent,
     ProfileComponent,
     GroupDetailsComponent,
+    UserSearchComponent,
+    FriendProfileComponent,
+    PostDetailsComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,

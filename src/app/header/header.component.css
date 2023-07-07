@@ -6,6 +6,7 @@
   
   .app-navbar {
     width: 100%;
+    background: black;
     display: flex;
     flex-wrap: wrap;
   }
@@ -28,6 +29,6 @@
     display: none;
   }
 
-  
+
   
   

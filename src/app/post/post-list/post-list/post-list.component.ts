@@ -18,6 +18,6 @@ export class PostListComponent implements OnInit {
   }
 
   getPosts(): void {
-    this.postService.getAll().subscribe((posts) => (this.postList = posts));
+    this.postService.getNonGroupPosts().subscribe((posts) => (this.postList = posts));
   }
 }

@@ -23,7 +23,6 @@ export class CanActiveAuthGuardService {
     if (this.authenticationService.tokenIsPresent()) {
       return true;
     } else {
-      this.router.navigate(["/"]);
       return false;
     }
   }

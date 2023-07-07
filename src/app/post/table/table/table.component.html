@@ -1,27 +1,92 @@
-<table>
-    <thead>
-        <tr>
-            <th>content</th>
-            <th>creation date</th>
-            <th>user</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let post of posts">
-            <td>{{post.content}}</td>
-            <td>{{post.creationDate}}</td>
-            <td>{{post.user.username}}</td>
-            <td><a (click)="deletePost(post.id)" href="">delete</a></td>
-            <button (click)="editPost(post.id, post.content)">edit</button>
-        </tr>
-    </tbody>
-    <div *ngIf="editing" class="container">
-        <form (ngSubmit)="onSubmit()" [formGroup]="form">
-            <label for="cont_i" name="cont_f">Content</label>
-            <br>
-            <textarea id="cont_i" type="text" formControlName="content" required></textarea>
-            <br>
-            <button type="submit">Save</button>
-        </form>
+
+<!-- <ul *ngFor="let post of posts" class="custom-list">
+    <li>Content: {{post.content}}
+        <button (click)="deletePost(post.id)">delete</button>
+        <button (click)="editPost(post.id, post.content)">edit</button>
+    </li>
+    <li>Creation date: {{post.creationDate}}</li>
+    <li>Posted by: {{post.user.username}}</li>
+
+    <button (click)="onSeeComments(post,post.id)">see post comment</button>
+</ul> -->
+
+<div *ngFor="let post of posts" class="form">
+    <div class="contentT">Post Content</div>
+    <div class="content">{{post.content}}</div>
+    <div class="contentT">Creation date</div>
+    <div class="content">{{post.creationDate}}</div>
+    <div class="contentT">Posted by</div>
+    <div class="content">{{post.user.username}}</div>
+    <div class="buttons">
+        <button (click)="deletePost(post.id)" class="button">delete</button>
+        <button (click)="editPost(post.id, post.content)" class="button">edit</button>
+        <button (click)="onSeeComments(post,post.id)"class="button">see post comment</button>
     </div>
-</table>
+</div>
+
+<div *ngIf="selectedPost" class="selectedPostDiv">
+
+
+    <div class="wrapper-around-content">
+        <h3>Post content: {{selectedPost.content}}</h3>
+        <h4>Created by: {{selectedPost.user.username}}</h4>
+    </div>
+
+    <div class="wrapper-around-comments">
+        <ul *ngFor="let comment of comments" class="custom-list">
+            <li>Comment text: {{comment.text}}</li>
+
+            <form (ngSubmit)="onSubmitReply(comment.id)" *ngIf="!submitted" [formGroup]="formReply">
+                <div>
+                    <label>Reply</label>
+                    <div>
+                        <input type="text" id="commentText" placeholder="CommentText" name="CommentText"
+                            formControlName="commentText" [(ngModel)]="reply.commentText" required minlength="5">
+                    </div>
+                </div>
+            
+                <div>
+                    <div>
+                        <button type="submit">Submit reply</button>
+                    </div>
+                </div>
+            </form>
+            
+            <div>
+                <h5>Replies</h5>
+                <app-comment [commentId]="comment.id">
+                </app-comment>
+            </div>
+
+        </ul>
+    </div>
+
+
+    <br>
+
+    <form (ngSubmit)="onSubmitComment(selectedPost.id)" *ngIf="!submitted" [formGroup]="formComment" class="form1">
+        <div>
+            <label>Comment content</label>
+            <div>
+                <input type="text" id="commentText" placeholder="CommentText" name="CommentText"
+                    formControlName="commentText" [(ngModel)]="comment.commentText" required minlength="5">
+            </div>
+        </div>
+    
+        <div>
+            <div>
+                <button type="submit">Submit comment</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="editing" class="container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <label for="cont_i" name="cont_f">Content</label>
+        <br>
+        <textarea id="cont_i" type="text" formControlName="content" required></textarea>
+        <br>
+        <button type="submit">Save</button>
+    </form>
+</div>

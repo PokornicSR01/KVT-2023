@@ -1,0 +1,21 @@
+.wrapper {
+    max-width: 80rem;
+    margin: 0 auto;
+}
+
+ol {
+    padding: 1.5rem 1.5rem 1.5rem 4em;
+    border: 0.3rem solid rgb(27, 0, 90);
+    columns: 25rem;
+    column-gap: 7rem;
+    column-rule: 4px dotted rgb(46, 0, 105);
+    border-radius: 0.5rem;
+}
+
+li {
+    break-inside: avoid;
+}
+
+* {
+    box-sizing: border-box;
+}

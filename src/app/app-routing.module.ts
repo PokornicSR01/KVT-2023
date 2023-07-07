@@ -12,6 +12,7 @@ import { ProfileComponent } from "./user/profile/profile.component";
 import { GroupTableComponent } from "./group/group-table/group-table.component";
 import { GroupListComponent } from "./group/group-list/group-list.component";
 import { GroupDetailsComponent } from "./group/group-details/group-details.component";
+import { FriendProfileComponent } from "./user/friend-profile/friend-profile.component";
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: "profile",
     component: ProfileComponent,
+  },
+  {
+    path: ":id/profile",
+    component: FriendProfileComponent,
   },
   {
     path: "groups",

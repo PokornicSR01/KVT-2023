@@ -18,6 +18,7 @@ import { Router } from "@angular/router";
 export class PostService {
   private headers = new HttpHeaders({ "Content-Type": "application/json" });
   postUrl = "http://localhost:8080/api/posts";
+  userUrl = "http://localhost:8080/api/users";
 
   user = this.userService.getMyInfo();
 
@@ -65,5 +66,9 @@ export class PostService {
   userName() {
     const user = this.userService.currentUser;
     return user.username;
+  }
+
+  getNonGroupPosts(): Observable<any[]> {
+    return this.http.get<any[]>(this.userUrl + "/posts");
   }
 }

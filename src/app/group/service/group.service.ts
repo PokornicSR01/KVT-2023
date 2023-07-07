@@ -38,8 +38,18 @@ export class GroupService {
     );
   }
 
+  suspendGroup(suspend, groupId) {
+    return this.http.post(
+      this.groupUrl + `/${groupId}/suspend`,
+      JSON.stringify(suspend),
+      {
+        headers: this.headers,
+        responseType: "text",
+      }
+    );
+  }
+
   promoteMember(groupId: number, memberId: number): Observable<any> {
-    console.log(this.groupUrl + `/${groupId}/admins/${memberId}`);
     return this.http.post(
       this.groupUrl + `/${groupId}/admins/${memberId}`,
       memberId

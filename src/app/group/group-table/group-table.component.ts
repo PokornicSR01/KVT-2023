@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Location } from "@angular/common";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { UserService } from "src/app/service";
 
 @Component({
   selector: "app-group-table",
@@ -14,21 +15,26 @@ import { takeUntil } from "rxjs/operators";
 })
 export class GroupTableComponent implements OnInit {
   @Input() groups: Group[];
+  loggedUser?: any;
   editing = false;
   form: FormGroup;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   notification: any;
   returnUrl: string;
+  groupAdmins: any;
 
   constructor(
     private groupService: GroupService,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private userService: UserService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getLoggedUser();
+  }
 
   deleteGroup(groupId: number) {
     this.groupService.delete(groupId).subscribe((group) => {
@@ -64,8 +70,30 @@ export class GroupTableComponent implements OnInit {
   }
 
   onSubmit() {
-    this.groupService.edit(this.form.value).subscribe((result) => {
-      
+    this.groupService.edit(this.form.value).subscribe((result) => {});
+  }
+
+  isGroupAdmin(groupId: number): boolean {
+    this.getGroupAdmins(groupId);
+
+    console.log(this.groupAdmins);
+    this.groupAdmins.forEach((admin) => {
+      if (admin.username === this.loggedUser) {
+        return true;
+      }
     });
+
+    return false;
+  }
+
+  getGroupAdmins(groupId: number) {
+    this.groupService
+      .getGroupAdmins(groupId)
+      .subscribe((admins) => (this.groupAdmins = admins));
+  }
+
+  getLoggedUser(): void {
+    const user = this.userService.currentUser;
+    this.loggedUser = user.username;
   }
 }

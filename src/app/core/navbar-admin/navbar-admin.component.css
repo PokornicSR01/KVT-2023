@@ -1,0 +1,23 @@
+div{
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+li {
+    margin-left: auto;
+    margin-top: 30px;
+    margin-right: auto;
+}
+
+a {
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
